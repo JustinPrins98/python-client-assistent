@@ -48,11 +48,55 @@ def verzamel_klant():
     - Leeftijd en besteding moeten getallen zijn (anders opnieuw vragen)
     - Klanttype mag alleen geldige waarden hebben (anders opnieuw vragen)
     """
-    # TODO: implementeer deze functie
-    pass
+    # Dictionary
+    customer_info_dic = {
+        "name" : None,
+        "age" : None,
+        "budget" : None,
+        "type" : None}
+
+    # flag
+    customer_age_set = False
+    budget_customer_set = False
+
+    name_customer = str(input("Wat is uw naam? "))
+    customer_info_dic["name"] = name_customer
+
+    while customer_age_set == False:
+        try:
+            age_customer = int(input("Wat is uw leeftijd? "))
+        except:
+            print("Age has to be a digit")
+        else:
+            customer_info_dic["age"] = age_customer
+            customer_age_set = True
+    
+    while budget_customer_set == False:
+        try:
+            budget_customer = float(input("Wat is uw bestedingsniveau? "))
+        except:
+            print("Budget has to be a digit")
+        else:
+            customer_info_dic["budget"] = budget_customer
+            budget_customer_set = True
+
+    # customer types
+    customer_type = None
+    customer_type_list = ["nieuw", "bestaand", "premium"]
+            
+    while customer_type not in customer_type_list:
+        customer_type = str(input("Wat is uw klanttype? (Keuze tussen nieuw, bestaand, premium) ")).strip().lower()
+    
+    customer_info_dic["type"] = customer_type
+
+    
+    return customer_info_dic
 
 
-def genereer_advies(klant):
+
+
+
+def genereer_advies(customer):
     """
     Ontvangt één klant (dictionary) en retourneert één advieslabel (string).
 
@@ -73,11 +117,34 @@ def genereer_advies(klant):
     2. Gebruik if / elif / else in de juiste volgorde (prioriteit)
     3. Return één advieslabel
     """
-    # TODO: implementeer deze functie
-    pass
+    
+    print(customer)
+
+    advice_label = [
+        'AOW-check en extra begeleiding', 
+        'Check aanvullende regelingen / samenloop', 
+        'Intensievere begeleiding (complex dossier)', 
+        'Standaard dienstverlening'
+        ]
+
+    if customer["type"] == "premium":
+        return advice_label[2]
+    
+    elif customer["age"] >= 67:
+        return advice_label[0]
+    
+    elif customer["budget"] > 100:
+        return advice_label[1]
+    
+    else:
+        return advice_label[3]
 
 
-def samenvatting(klanten):
+
+
+
+
+def samenvatting(customers):
     """
     Print een samenvatting van alle klanten en adviezen.
 
@@ -91,11 +158,29 @@ def samenvatting(klanten):
     3. Tel de adviezen (bijv. met een dict)
     4. Print het overzicht netjes
     """
-    # TODO: implementeer deze functie
-    pass
+    advice_dictionary = {
+        "AOW-check en extra begeleiding": 0,
+        "Check aanvullende regelingen / samenloop": 0,
+        "Intensievere begeleiding (complex dossier)": 0,
+        "Standaard dienstverlening": 0
+    }
+    
+    # customer_list = []
+
+    for customer in customers:
+        given_advice = genereer_advies(customer)
+        advice_dictionary[given_advice] += 1
+
+    print("\n--- SAMENVATTING ---")
+    print(f"Aantal klanten: {len(customers)}\n")
+
+    for advice, count in advice_dictionary.items():
+        print(f"{advice}: {count}")
 
 
 def main():
+
+    
     """
     Hoofdprogramma van de applicatie.
 
@@ -108,12 +193,27 @@ def main():
     6. Toon een samenvatting (samenvatting)
     """
     print("KlantAssistent gestart (WerkZeker Nederland)")
+    print("Welkom bij de KlantAssistent")
 
-    # TODO: implementeer de hoofdlogica
-    pass
+    customer_list = []
+
+    while True:
+        try:
+            amount_of_customers = int(input("Hoeveel klanten wil je invoeren? "))
+            break
+        except:
+            print("Aantal moet een getal zijn")
+
+    for _ in range(amount_of_customers):
+        customer = verzamel_klant()
+        customer_list.append(customer)
+
+        advies = genereer_advies(customer)
+        print(f"Advies: {advies}\n")
+
+    samenvatting(customer_list)
 
 
 if __name__ == "__main__":
     main()
 
-'ADASLJDL'

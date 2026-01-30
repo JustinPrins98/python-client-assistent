@@ -1,39 +1,50 @@
-—
-CODE KICKSTART — KlantAssistent
-—
+# KlantAssistent – WerkZeker Nederland
 
-## Context
-Dit project is onderdeel van de training **Code Kickstart**.
-Je bouwt een eenvoudige Python applicatie die klantgegevens verwerkt
-en op basis daarvan een advies geeft.
+## Wat doet de tool?
 
-De applicatie draait in de **terminal**.
+De **KlantAssistent** is een Python terminal applicatie die medewerkers van WerkZeker Nederland ondersteunt bij het inschatten van klantdossiers.
 
----
+De tool:
 
-## Doel
-- Oefenen met Python fundamentals
-- Leren denken in iteraties
-- Werken volgens een engineering mindset
+* Vraagt gegevens van één of meerdere klanten (naam, leeftijd, besteding en klanttype)
+* Verwerkt deze gegevens 
+* Genereert per klant één advieslabel
+* Geeft aan het einde een samenvatting van alle gegenereerde adviezen
+
+De tool voert geen acties uit, kent geen rechten toe en neemt geen echte besluiten.
 
 ---
 
-## Functionaliteit
-De gebruiker voert voor één of meerdere klanten in:
-- naam
-- leeftijd
-- bestedingsniveau
-- klanttype
+## Hoe gebruik je hem?
 
-De applicatie:
-- slaat deze data op
-- genereert een advies per klant
-- print een samenvatting
+### Benodigdheden
 
----
+* Python 3.x
+* Een terminal of command prompt
 
-## Gebruik
-1. Open een terminal in deze map
-2. Run:
-   ```bash
-   python klant_assistent.py
+### Applicatie starten
+
+1. Open een terminal
+2. Navigeer naar de map waarin het Python-bestand staat
+3. Start de applicatie met:
+
+```bash
+python main.py
+```
+
+*(Gebruik eventueel `python3`)*
+
+### Gebruik
+
+1. De applicatie vraagt hoeveel klanten je wilt invoeren
+2. Per klant vul je de volgende gegevens in:
+
+   * Naam
+   * Leeftijd (getal)
+   * Bestedingsniveau per maand (getal)
+   * Klanttype (`nieuw`, `bestaand` of `premium`)
+3. Na elke invoer toont de applicatie direct een advieslabel
+4. Na afloop verschijnt een samenvatting met:
+
+   * Het totaal aantal ingevoerde klanten
+   * Het aantal keer dat elk advieslabel voorkomt
