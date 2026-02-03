@@ -23,7 +23,7 @@ Spelregels:
 - Werk toe naar een werkende terminal-applicatie
 """
 
-print("OUTPUT HELLO")
+print("OUTPUT HELLOOO")
 
 
 def verzamel_klant():
