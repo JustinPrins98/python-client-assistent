@@ -28,7 +28,7 @@ print("OUTPUT HELLOOO")
 
 def verzamel_klant():
     """
-    Vraagt gegevens van één klant/aanvrager en retourneert een dictionary.
+    Vraagt gegevens van één klant/aanvrager en retourneert een dictionarya.
 
     Verwachte keys in de dictionary:
     - naam (str)
@@ -56,25 +56,49 @@ def verzamel_klant():
         "type" : None}
 
     # flag
+    customer_name_set = False
     customer_age_set = False
     budget_customer_set = False
 
-    name_customer = str(input("Wat is uw naam? "))
-    customer_info_dic["name"] = name_customer
 
-    while customer_age_set == False:
+    while not customer_name_set:
+        try:
+            name_customer = str(input("Wat is uw naam? "))
+
+            if not name_customer.strip():
+                raise ValueError("Lege invoer")
+
+        except ValueError as err:
+            print(f"Invalid input ({err})")
+
+        else:
+              customer_info_dic["name"] = name_customer
+              customer_name_set = True
+
+  
+    while not customer_age_set:
         try:
             age_customer = int(input("Wat is uw leeftijd? "))
-        except:
+
+            if age_customer <= 0:
+                print("Age must be positive")
+                continue
+
+        except ValueError:
             print("Age has to be a digit")
         else:
             customer_info_dic["age"] = age_customer
             customer_age_set = True
     
-    while budget_customer_set == False:
+    while not budget_customer_set:
         try:
             budget_customer = float(input("Wat is uw bestedingsniveau? "))
-        except:
+
+            if budget_customer <= 0:
+                print("Budget must be positive")
+                continue
+
+        except ValueError:
             print("Budget has to be a digit")
         else:
             customer_info_dic["budget"] = budget_customer
@@ -83,11 +107,14 @@ def verzamel_klant():
     # customer types
     customer_type = None
     customer_type_list = ["nieuw", "bestaand", "premium"]
+
+    number_list = [1,2,3,4 ]
+  
             
     while customer_type not in customer_type_list:
         customer_type = str(input("Wat is uw klanttype? (Keuze tussen nieuw, bestaand, premium) ")).strip().lower()
     
-    customer_info_dic["type"] = customer_type
+    customer_info_dic["type"] == customer_type
 
     
     return customer_info_dic
@@ -203,6 +230,7 @@ def main():
             break
         except:
             print("Aantal moet een getal zijn")
+
 
     for _ in range(amount_of_customers):
         customer = verzamel_klant()
